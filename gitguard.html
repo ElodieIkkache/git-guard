@@ -24,6 +24,15 @@
 		   text-align: center;
 		}
 		
+		p {
+			text-align: left;
+			color: #ffffff;
+		}
+		
+		h5{
+			font-size: 20px;
+		}
+		
 		h3 {
 			color: #513742;
 			font-size: 30px;
@@ -38,8 +47,15 @@
 			color: #ffffff;
 			font-size: 100px;
 		}
-		.btn btn-warning btn-block{
-			padding : 10px;
+		
+		.container {
+			background-color:rgba(0, 0, 1, 0.5);
+			padding-left : 0px;
+			padding-right : 0px;
+		}
+		
+		.collapse {
+			padding: 20px;
 		}
 		
 	</style>
@@ -58,36 +74,39 @@
 			    </div>
 			</div>
 		</form>
+		
+		<h3>Choose a visualisation</h3>
 	</div>
 
 	
 	
 	<div class="container">
-	  <h3>Choose a visualisation</h3>
-	  
-	  <button type="button" class="btn btn-warning btn-block" data-toggle="collapse" data-target="#V1"> <h5>contribution of all members</h5></button>
+	    
+	  <button type="button" class="btn btn-warning btn-block" data-toggle="collapse" data-target="#V1" data-toggle="modal" data-target="#myModal"> <h5>contribution of all members</h5></button>
 	  <div id="V1" class="collapse">
-		visualisation 1
+		<p>visualisation 1</p>
+		<p>i want to use a caroussel to go from commits comparison to addition and deletions ^^</p>
+		<p>we can also use a scrollspy, but i like it this way :) </p>
 	  </div>
 	  
 	  <button type="button" class="btn btn-warning btn-block" data-toggle="collapse" data-target="#V2"><h5>commit history for one member</h5></button>
 	  <div id="V2" class="collapse">
-		visualisation 2
+		<p>visualisation 2</p>
 	  </div>
 	  
 	  <button type="button" class="btn btn-warning btn-block" data-toggle="collapse" data-target="#V3"><h5>commit history for several members</h5></button>
 	  <div id="V3" class="collapse">
-		visualisation 3
+		<p>visualisation 3</p>
 	  </div>
 	  
 	  <button type="button" class="btn btn-warning btn-block" data-toggle="collapse" data-target="#V4"><h5>commit history of all members</h5></button>
 	  <div id="V4" class="collapse">
-		visualisation 4
+		<p>visualisation 4</p>
 	  </div>
 	  
 	  <button type="button" class="btn btn-warning btn-block" data-toggle="collapse" data-target="#V5"><h5>lines of code from each member</h5></button>
 	  <div id="V5" class="collapse">
-		visualisation 5
+		<p>visualisation 5</p>
 	  </div>
 	  
 	</div>
