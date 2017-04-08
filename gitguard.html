@@ -1,0 +1,124 @@
+<!Doctype html>
+<html>
+
+<head>
+
+	<title>Git-Guard</title>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+	<!--boostrap-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	<style>
+		body {
+		   background-image:  url(bg.jpg);
+		   background-repeat : no-repeat;
+		   background-attachment : fixed;
+		   text-align: center;
+		}
+		
+		h3 {
+			color: #513742;
+			font-size: 30px;
+		}
+		
+		h2{
+			color: #ffffff;
+			font-size: 40px;
+		}
+		
+		h1 { 
+			color: #ffffff;
+			font-size: 100px;
+		}
+		.btn btn-warning btn-block{
+			padding : 10px;
+		}
+		
+	</style>
+	
+</head>
+
+<body>
+	<div class="text-center">
+		<h1>Git-Guard</h1> 
+		<h2>Use this application to analyse the contributions to git projects!</h2>
+		<form class="form-inline">
+			<div class="input-group">
+				<input type="text" class="form-control" size="50" id="repository" placeholder="GIT repository link" required>
+				<div class="input-group-btn">
+					<button type="submit" class="btn btn-default">Submit</button>
+			    </div>
+			</div>
+		</form>
+	</div>
+
+	
+	
+	<div class="container">
+	  <h3>Choose a visualisation</h3>
+	  
+	  <button type="button" class="btn btn-warning btn-block" data-toggle="collapse" data-target="#V1"> <h5>contribution of all members</h5></button>
+	  <div id="V1" class="collapse">
+		visualisation 1
+	  </div>
+	  
+	  <button type="button" class="btn btn-warning btn-block" data-toggle="collapse" data-target="#V2"><h5>commit history for one member</h5></button>
+	  <div id="V2" class="collapse">
+		visualisation 2
+	  </div>
+	  
+	  <button type="button" class="btn btn-warning btn-block" data-toggle="collapse" data-target="#V3"><h5>commit history for several members</h5></button>
+	  <div id="V3" class="collapse">
+		visualisation 3
+	  </div>
+	  
+	  <button type="button" class="btn btn-warning btn-block" data-toggle="collapse" data-target="#V4"><h5>commit history of all members</h5></button>
+	  <div id="V4" class="collapse">
+		visualisation 4
+	  </div>
+	  
+	  <button type="button" class="btn btn-warning btn-block" data-toggle="collapse" data-target="#V5"><h5>lines of code from each member</h5></button>
+	  <div id="V5" class="collapse">
+		visualisation 5
+	  </div>
+	  
+	</div>
+	
+
+
+</body>
+<!--
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#">Home</a></li>
+  <li><a href="#">Menu 1</a></li>
+  <li><a href="#">Menu 2</a></li>
+  <li><a href="#">Menu 3</a></li>
+</ul>
+
+
+<footer>
+.breadcrumb {
+			background-color: #631836;
+			color: #ffffff;
+		}
+
+	<ul class="breadcrumb text-center">
+		<li class="active"><a href="#">choose git repository</a></li>
+		<li><a href="#">contribution of all members</a></li>
+		<li><a href="#">commit history for one member</a></li>
+		<li><a href="#">commit history for several members</a></li>
+		<li><a href="#">commit history of all members</a></li>
+		<li><a href="#">lines of code from each member</a></li>
+	</ul>
+	
+</footer>
+-->
