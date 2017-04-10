@@ -1,7 +1,7 @@
-			var svg = d3.select("svg"),
+var visu5 = d3.select("#visualisation5"),
 				margin = 20,
-				diameter = +svg.attr("width"),
-				g = svg.append("g").attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
+				diameter = +visu5.attr("width"),
+				g = visu5.append("g").attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
 
 			var color = d3.scaleLinear()
 				.domain([-1, 5])
@@ -12,7 +12,7 @@
 				.size([diameter - margin, diameter - margin])
 				.padding(2);
 
-			d3.json("flare.json", function(error, root) {
+			d3.json("visualisation5/flare.json", function(error, root) {
 			  if (error) throw error;
 
 			  root = d3.hierarchy(root)
@@ -40,7 +40,7 @@
 
 			  var node = g.selectAll("circle,text");
 
-			  svg
+			  visu5
 				  .style("background", color(-1))
 				  .on("click", function() { zoom(root); });
 
