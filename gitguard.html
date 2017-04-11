@@ -74,6 +74,33 @@
 			<!--j'arrive pas à center!!!!!!!!!!!!!!!!!!!!!!-->
 		}
 		
+		<!--for visualisation 1 = bar graph-->
+		.bar {
+		  fill: orange;
+		}
+
+		.bar:hover {
+		  fill: purple;
+		}
+
+		.axis--x path {
+		  display: none;
+		}
+
+		<!--for visualisation 3 = multiple lines graph-->
+
+		.axis--x path {
+		  display: none;
+		}
+
+		.line {
+		  fill: none;
+		  stroke: steelblue;
+		  stroke-width: 1.5px;
+		}
+
+
+
 		<!--for visualisation 4 = heatmap-->
 		      rect.bordered {
 				stroke: #E6E6E6;
@@ -128,7 +155,7 @@
 
 <body>
 	<div>
-		<h1>GIT-Guard</h1> 
+		<h1>GIT- Guard</h1>
 		<h2>Use this application to analyse the contributions to git projects!</h2>
 		<form class="form-inline">
 			<div class="input-group">
@@ -148,6 +175,9 @@
 	  <!--visualisation 1-->
 	  <button type="button" class="btn btn-warning btn-block" data-toggle="collapse" data-target="#V1" data-toggle="modal" data-target="#myModal"> <h5>contribution of all members</h5></button>
 	  <div id="V1" class="collapse">
+
+		<script src="https://d3js.org/d3.v4.min.js"></script>
+		
 		<p>See the contribution of all team members! The first visualisation is based on the number of commits for each of the team members. The second is based on the total number of additions and deletions.</p>
 		<div id="myCarousel" class="carousel slide" data-ride="carousel">
 			  <!-- Indicators -->
@@ -159,11 +189,63 @@
 			  <!-- Wrapper for slides -->
 			  <div class="carousel-inner" role="listbox" style = >
 				<div class="item active" >
-				  <img src="http://image.tutorvista.com/content/feed/u845/bargraph.gif" alt="Commits">
+					  		<svg id="visualisation1" width="960" height="500"></svg>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script>
+var zert = d3.select("#visualisation1"),
+    margin = {top: 20, right: 20, bottom: 30, left: 50},
+    width = +zert.attr("width") - margin.left - margin.right,
+    height = +zert.attr("height") - margin.top - margin.bottom;
+
+var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
+    y = d3.scaleLinear().rangeRound([height, 0]);
+
+var g = zert.append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+d3.tsv("visualisation1/data.tsv", function(d) {
+  d.frequency = +d.frequency;
+  return d;
+}, function(error, data) {
+  if (error) throw error;
+
+  x.domain(data.map(function(d) { return d.letter; }));
+  y.domain([0, d3.max(data, function(d) { return d.frequency; })]);
+
+  g.append("g")
+      .attr("class", "axis axis--x")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x));
+
+  g.append("g")
+      .attr("class", "axis axis--y")
+      .call(d3.axisLeft(y).ticks(10, "%"))
+    .append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      .attr("dy", "0.71em")
+      .attr("text-anchor", "end")
+      .text("Frequency");
+
+  g.selectAll(".bar")
+    .data(data)
+    .enter().append("rect")
+      .attr("class", "bar")
+      .attr("x", function(d) { return x(d.letter); })
+      .attr("y", function(d) { return y(d.frequency); })
+      .attr("width", x.bandwidth())
+      .attr("height", function(d) { return height - y(d.frequency); });
+});
+
+</script>
+				<br>
+				<br>
+				<br>
+				<br>
 				</div>
 
 				<div class="item">
-				  <img src="http://www.thinkoutsidetheslide.com/wp-content/uploads/2013/12/DivergingStackedBarChart.png" alt="Additions and deletions">
+				  <svg id="visualisation1adddel" width = "900" hight="560"></svg>
 				</div>
 			  </div>
 
@@ -347,6 +429,9 @@
 			
 			</div>
 		</form>
+		
+		<!-- we should do it with python-->
+		<div id="visualisation2"></div>
 	  </div>
 	  
 	  
@@ -517,6 +602,12 @@
 			
 			</div>
 		</form>
+		
+		<!--multiple lines graph-->
+		<div id="visualisation3"></div>
+		<!--D3 is not working properly : i can't select an svg by ID so they all get mixed up...-->
+		</script>
+
 	  </div>
 	  
 	  
