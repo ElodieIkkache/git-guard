@@ -20,8 +20,13 @@ var fromy4;
 var tod4;
 var tom4;
 var toy4;
+var filePath;
+var startLineNo;
+var endLineNo;
+
 var fromDateISO23;
 var toDateISO23;
+
 var fromDateISO4;
 var toDateISO4;
 
@@ -53,6 +58,7 @@ function readRepository() {
 	getRepo();
 	link1 = "https://api.github.com/repos/" + owner + "/" + repo + "/stats/contributors";
 	link23 = "https://api.github.com/repos/" + owner + "/" + repo + "/commits";
+	link4 = "https://api.github.com/repos/" + owner + "/" + repo + "/commits?path="; //add path later 
 }
 
 function getlink23() {
@@ -67,6 +73,35 @@ function getlink23() {
 	toy23 = document.getElementById("toyear23").value;
 	fromDateISO23 = getDateFromNo(fromd23, fromm23, fromy23);
 	toDateISO23 = getDateFromNo(tod23, tom23, toy23);
+}
+
+function getlink4() {
+	filePath = getFilepath();
+	link4 += filePath;
+	console.log(filepath);
+	fromm4 = parseInt(document.getElementById("frommonth4").value);
+	fromy4 = parseInt(document.getElementById("fromyear4").value);
+	tom4 = parseInt(document.getElementById("tomonth4").value);
+	toy4 = parseInt(document.getElementById("toyear4").value);
+	//startLineNo = document.forms["form4"]["lineFrom"].value;
+	//endLineNo = document.forms["form4"]["lineTo"].value;
+}
+
+function getFilepath() {
+	var gitpath = (document.forms["form4"]["file"].value).trim; //gets entire filepath as string
+	var arrPath = gitpath.split("/");
+	var len = arrPath.length();
+	var i=0;
+	var finalPath;
+	for (i=7; i<len; i++) {
+		if(i=len-1) {
+			finalPath +=arrPath[i];
+		}
+		else {
+			finalPath +=arrPath[i]+"/";
+		}
+	}
+	return finalPath;
 }
 
 function getDateFromNo(d,m,y) {
@@ -104,12 +139,6 @@ function dumpResponse() {
 
 
 
-
-
-
-
-
-
 //First visualisation --> /!\no from!! so it's either with the container button or a 'display graph' button
 
 function visualisationOne(){
@@ -131,8 +160,16 @@ function visualisationTwoThree(){
 	var v23Data = visualisation(link23); //get the json file
 	console.log(v23Data);
 	//processdataV23(v23Data); //transfrom it into usable data
-	//console.log(dataauthors);
-	//console.log(datacommits);
+}
+
+function visualisationFour() {
+	//this is the function called from the html page for the 4th visualisation
+	//console.log(link4);
+	getlink4(); //sets the parameters
+	console.log(filePath);
+	var v4Data = visualisation(link4); //get the json file
+	console.log(v4Data);
+	//processdataV4(v4Data); //transfrom it into usable data
 }
 
 function visualisation(link) {
