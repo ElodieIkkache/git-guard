@@ -337,14 +337,18 @@ function getFilepath() {
 	var arrPath = gitpath.split("/");
 	console.log(arrPath);
 	var len = arrPath.length;
-	var i=0;
-	var finalPath;
+	console.log(len);
+	var i;
+	var finalPath = new String();
 	for (i=7; i<len; i++) {
-		if(i=len-1) {
-			finalPath +=arrPath[i];
+		if(i==len-1) {
+			console.log(typeof(arrPath[i]));
+			finalPath = finalPath + arrPath[i];
+			console.log(finalPath);
 		}
 		else {
-			finalPath +=arrPath[i]+"/";
+			finalPath = finalPath + arrPath[i] + "/";
+			console.log(finalPath);
 		}
 	}
 	return finalPath;
