@@ -7,6 +7,23 @@ var userInput;
 var owner;
 var repo;
 var returnObj;
+var arrOfAuthors;
+var fromd23;
+var fromm23;
+var fromy23;
+var tod23;
+var tom23;
+var toy23;
+var fromd4;
+var fromm4;
+var fromy4;
+var tod4;
+var tom4;
+var toy4;
+var fromDateISO23;
+var toDateISO23;
+var fromDateISO4;
+var toDateISO4;
 
 //visualisation1
 var dataauthors;
@@ -27,14 +44,7 @@ var layout1B;
 
 
 
-
-
-
-
-
-
-
-//FONCTIONS
+//FUNCTIONS
 
 //First submit button : get the repository link
 function readRepository() {
@@ -42,10 +52,38 @@ function readRepository() {
 	//and close the containers for the visualisations? i'll tell you as soon as i know ^^
 	getRepo();
 	link1 = "https://api.github.com/repos/" + owner + "/" + repo + "/stats/contributors";
-	
+	link23 = "https://api.github.com/repos/" + owner + "/" + repo + "/commits";
 }
 
+function getlink23() {
+	usernames = document.forms["form23"]["author"].value; //gets the username(s) as string , authors separated by ,
+	console.log(usernames);
+	arrOfAuthors = usernames.split(","); //use string.trim() before checking author
+	fromd23 = document.getElementById("fromday23").value;
+	fromm23 = document.getElementById("frommonth23").value;
+	fromy23 = document.getElementById("fromyear23").value;
+	tod23 = document.getElementById("today23").value;
+	tom23 = document.getElementById("tomonth23").value;
+	toy23 = document.getElementById("toyear23").value;
+	fromDateISO23 = getDateFromNo(fromd23, fromm23, fromy23);
+	toDateISO23 = getDateFromNo(tod23, tom23, toy23);
+}
 
+function getDateFromNo(d,m,y) {
+	var year = parseInt(y);
+	console.log(year);
+	console.log(month);
+	console.log(day);
+	var month = parseInt(m) - 1;
+	var day = parseInt(d) + 1;
+	var d = new Date(year,month,day);
+	console.log(d);
+	var n = d.toISOString();
+	console.log(n);
+	var arrOfDates = n.split("T");
+	var d2 = arrOfDates[0] + "T";
+	return d2;
+}
 
 function getRepo() {
 userInput = document.forms["GitLink"]["fname"].value;	
@@ -77,15 +115,29 @@ function dumpResponse() {
 function visualisationOne(){
 	//this is the function called from the html page for the first visualisation
 	console.log(link1);
-	var v1Data = visualisation1(); //get the json file
+	var v1Data = visualisation(link1); //get the json file
 	processdataV1(v1Data); //transfrom it into usable data
 	console.log(dataauthors);
 	console.log(datacommits);
 }
 
-function visualisation1() {
+function visualisationTwoThree(){
+	//this is the function called from the html page for the third visualisation
+	console.log(link23);
+	getlink23(); //sets the authors, dates
+	console.log(arrOfAuthors);
+	console.log(fromDateISO23);
+	console.log(toDateISO23);
+	var v23Data = visualisation(link23); //get the json file
+	console.log(v23Data);
+	//processdataV23(v23Data); //transfrom it into usable data
+	//console.log(dataauthors);
+	//console.log(datacommits);
+}
+
+function visualisation(link) {
 var xmlHttpObjective_1 = new XMLHttpRequest();
-xmlHttpObjective_1.open("GET", link1, false); // false for synchronous request
+xmlHttpObjective_1.open("GET",link, false); // false for synchronous request
 xmlHttpObjective_1.send(null);
 var responseObjective_1 =  JSON.parse(xmlHttpObjective_1.responseText);
 //console.log(typeof(responseObjective_1));
