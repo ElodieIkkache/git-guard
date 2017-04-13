@@ -20,6 +20,31 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 	<style>
+		.links {
+			padding-bottom: 10px;
+			padding-top: 10px;
+		}
+		
+		a:link {
+			color: white; 
+			background-color: transparent; 
+			text-decoration: none;
+			font-size: 30px;
+		}
+
+		a:visited {
+			color: pink;
+			background-color: transparent;
+			text-decoration: none;
+			font-size: 30px;
+		}
+
+		a:hover {
+			color: gold;
+			background-color: transparent;
+			text-decoration: underline
+			font-size: 30px;
+		}
 		body {
 		   background-image:  url(bg.jpg);
 		   background-repeat : no-repeat;
@@ -76,6 +101,24 @@
 <body>
 	<div>
 		<h1>GIT- Guard</h1>
+		<div class="links">
+			<a href="gitguard.html">
+				<img src="home.png" alt="home page" style="width:80px;height:80px;border:0">
+			</a>			
+			<a href="V2.html">
+				<img src="V2.png" alt="commit history of a single member" style="width:80px;height:80px;border:0">
+			</a>
+			<a href="V3.html">
+				<img src="V3.png" alt="commit history of several members" style="width:80px;height:80px;border:0">
+			</a>
+			<a href="V4.html">
+				<img src="V4.png" alt="commit history of all members" style="width:80px;height:80px;border:0">
+			</a>
+			<a href="V5.html">
+				<img src="V5.png" alt="lines of code from each members" style="width:80px;height:80px;border:0">
+			</a>
+		</div>
+		
 		<h2>contribution of all members</h2>
 		<div class="visual">
 			<p>See the contribution of all team members! The first visualisation is based on the number of commits for each of the team members. The second is based on the total number of additions and deletions.</p>
@@ -286,7 +329,8 @@
 
 		});
 		</script>
-		
+		</div>
+		</div>
 		<br>
 <br>
 </body>
