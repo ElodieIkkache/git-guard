@@ -1,4 +1,4 @@
-[
+var responseText = [
   {
     "total": 15,
     "weeks": [
@@ -815,4 +815,29 @@
       "site_admin": false
     }
   }
-]
+];
+
+
+var data1 = [];
+var data2 = [];
+
+
+for (var i = 0; i<responseText.length; i++) {
+
+	var contribution1 = {author:responseText[i]["author"]["login"], commits:responseText[i]["total"]};
+	data1[data1.length] = contribution1; 
+	
+	var addition = 0;
+	var deletion = 0;
+	
+	for (var j = 0; j<responseText[i]["weeks"].length; j++){
+		addition += responseText[i]["weeks"][j]["a"];
+		deletion += responseText[i]["weeks"][j]["d"];
+	}
+	
+	var contribution2 = {author:responseText[i]["author"]["login"], additions:addition, deletions:deletion};
+	data2[data2.length] = contribution2;
+	
+}
+
+console.log(data2);

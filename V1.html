@@ -15,6 +15,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	
+	<script src="script1.js"></script>
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -140,7 +141,7 @@
 		var g = zert.append("g")
 			.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-		d3.tsv("visualisation1/data.tsv", function(d) {
+		d3.tsv("V1Adata.tsv", function(d) {
 		  d.frequency = +d.frequency;
 		  return d;
 		}, function(error, data) {
@@ -217,7 +218,7 @@
 
 		  color.domain(["Strongly disagree", "Disagree", "Neither agree nor disagree", "Agree", "Strongly agree"]);
 
-		  d3.csv("visualisation1/raw_data.csv", function(error, data) {
+		  d3.csv("V1Bdata.csv", function(error, data) {
 
 		  data.forEach(function(d) {
 			// calc percentages
