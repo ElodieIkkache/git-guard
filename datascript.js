@@ -315,7 +315,7 @@ function visualisationFour() {
 	//console.log(filePath);
 	var v4Data = visualisation(link4); //get the json file
 	console.log(v4Data);
-	//processdataV4(v4Data); //transfrom it into usable data
+	processdataV4(v4Data); //transfrom it into usable data
 }
 
 function getlink4() {
