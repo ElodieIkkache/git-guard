@@ -101,7 +101,7 @@
 	<div>
 		<h1>GIT- Guard</h1>
 		<h2>Use this application to analyse the contributions to git projects!</h2>
-		<form class="form-inline" name="GitLink">
+		<form class="form-inline" name="GitLink" onsubmit="return false">
 			<div class="input-group">
 				<input name="fname" type="text" class="form-control" size="50" id="repository" placeholder="GIT repository link" required>
 				<div class="input-group-btn">
@@ -111,41 +111,43 @@
 		</form>
 		
 		<h3>Choose a visualisation</h3>
-		
-		<h2>contribution of all members</h2>
+	
+	</div>
+	
+	
+	<div class="container">
+	  <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#demo"  onclick = "change1()"> <img src="V1.png" alt="contribution of all members" style="width:80px;height:80px;border:0">   contribution of all members</button>
+	  <div id="demo" class="collapse">
 		<div class="visual">
 			<p>See the contribution of all team members! The first visualisation is based on the number of commits for each of the team members. The second is based on the total number of additions and deletions.</p>
 			<br>
-			<div id="myDiv" style="width: 480px; height: 400px;"></div>
-
 			<script>
-			Plotly.newPlot('myDiv', data1A);
+			function change1(){
+				visualisationOne(); 
+				Plotly.newPlot('myDiv', data1A);
+				Plotly.newPlot('myDivB', data1B, layout1B);
+			}
 			</script>
-			<p id="test">number of commits for each member</p>
 			
+			<div id="myDiv" style="width: 480px; height: 400px;"></div>
+			<p id="test">number of commits for each member</p>
 		
-		
-		<br>
-		<br>
-		<br>		
-
-
-		<div id="myDivB" style="width: 480px; height: 400px;">
-
-		<script>
-		Plotly.newPlot('myDivB', data1B, layout1B);
-		</script>
-		<p>number of additions and deletions for each member</p>
-		
-		
+			<br>
+			<br>
+			<br>		
+			
+			<div id="myDivB" style="width: 480px; height: 400px;">
+			<p>number of additions and deletions for each member</p>
 		</div>
+	  </div>
 	</div>
 	
+	
+	
+	
+	
+	
 	<div class="links">
-	<a href="V1.html">
-		<img src="V1.png" alt="contribution of all members" style="width:80px;height:80px;border:0">
-		contribution of all members
-	</a>
 	
 	<br>
 	

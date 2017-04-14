@@ -42,12 +42,10 @@ function readRepository() {
 	//and close the containers for the visualisations? i'll tell you as soon as i know ^^
 	getRepo();
 	link1 = "https://api.github.com/repos/" + owner + "/" + repo + "/stats/contributors";
-	var v1Data = visualisation1(link1);
-	console.log(v1Data);
-	processdataV1(v1Data);
-	console.log(dataauthors);
-	console.log(datacommits);
+	
 }
+
+
 
 function getRepo() {
 userInput = document.forms["GitLink"]["fname"].value;	
@@ -58,29 +56,6 @@ console.log(userInput);
 console.log(arrOfInputs);
 console.log(owner);
 console.log(repo);
-}
-
-
-
-
-
-
-
-
-
-
-function visualisation1(link) {
-getRepo();
-//link = "https://api.github.com/repos/" + owner + "/" + repo + "/stats/contributors";
-//console.log(typeof(link));
-//console.log(link);
-var xmlHttpObjective_1 = new XMLHttpRequest();
-xmlHttpObjective_1.open("GET", link, false); // false for synchronous request
-xmlHttpObjective_1.send(null);
-var responseObjective_1 =  JSON.parse(xmlHttpObjective_1.responseText);
-//console.log(typeof(responseObjective_1));
-//console.log(responseObjective_1);
-return responseObjective_1;
 }
 
 function dumpResponse() {
@@ -98,6 +73,27 @@ function dumpResponse() {
 
 
 //First visualisation --> /!\no from!! so it's either with the container button or a 'display graph' button
+
+function visualisationOne(){
+	//this is the function called from the html page for the first visualisation
+	console.log(link1);
+	var v1Data = visualisation1(); //get the json file
+	processdataV1(v1Data); //transfrom it into usable data
+	console.log(dataauthors);
+	console.log(datacommits);
+}
+
+function visualisation1() {
+var xmlHttpObjective_1 = new XMLHttpRequest();
+xmlHttpObjective_1.open("GET", link1, false); // false for synchronous request
+xmlHttpObjective_1.send(null);
+var responseObjective_1 =  JSON.parse(xmlHttpObjective_1.responseText);
+//console.log(typeof(responseObjective_1));
+//console.log(responseObjective_1);
+return responseObjective_1;
+}
+
+
 function processdataV1(jsonfile){
 	//this function takes a json as an input and formats the data so that it is ready for the first visualisation (2 graphs)
 	
