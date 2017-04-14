@@ -172,11 +172,6 @@ function processdataV1(jsonfile){
 	
 	
 	
-	
-	
-	
-	
-	
 //Second and third visualisations --> there is a form!! submit button should make a section appear
 function visualisationTwoThree(){
 	//this is the function called from the html page for the third visualisation
@@ -196,12 +191,18 @@ function getlink23() {
 	tom23 = parseInt(document.getElementById("Tomonth23").value);
 	toy23 = parseInt(document.getElementById("Toyear23").value);
 }
-/*
+
 function processdataV23(jsonfile){
 	//this function takes a json as an input and formats the data so that it is ready for the second and third visualisation
 	
 	//the data axis
+	/*var date = [];
+	var scale; //July 2016 to March 2017  */
+	/*var numberOfYears = toy23 - fromy23; //1    
+	var numberOfMonth = 12*numberOfYears + tom23 - fromm23 + 1; //12 + 3 - 7 = 8 + 1 = 9*/
+	
 	var date = [];
+<<<<<<< HEAD
 	var numberOfYears = toy23 - fromy23;
 	var numberOfMonth = 12*numberOfYears + tom23 - fromm23;
 
@@ -209,26 +210,52 @@ function processdataV23(jsonfile){
 	for (var y = fromy23; y<= toy23; y++){
 		for (var m=1; m<=12; m++){
 			//if it is the good year but too early for the months
+=======
+	var y;
+	var m;
+	var fmonthcounter = fromm23; //may 2016, jun 2018
+	var tmonthcounter = 1;
+	var normalcounter = 1;
+	
+	if(fromy23!=toy23) {
+		for (y = fromy23; y <= toy23; y++){
+			
+>>>>>>> 00da9fb3eefb5f505f4ceaecfeb1184a2a6218cd
 			if (y == fromy23) {
-				console.log("does it goes inside the too early");
-				if (m < fromm23){
-					console.log(m);
+				while(fmonthcounter<=12) {
+					date[date.length]= fmonthcounter + "/" + y;					
+					fmonthcounter++;
 				}
 			}
+
 			//if it is the last year but too late for the month
 			else if (y == toy23) {
-				if (m>tom23){
-					console.log(m);
+				console.log("elseif");
+				while(tmonthcounter<=tom23) {
+					date[date.length]= tmonthcounter + "/" + y;
+					tmonthcounter++;
 				}
 			}
 			//if it is within time limits
 			else {
-				date[date.length]= m + "/" + y;
+				console.log("else");
+				while(normalcounter<=12) {
+					date[date.length]= normalcounter + "/" + y;
+					normalcounter++;
+				}
+				normalcounter=1;
 			}
-			
+				
 		}
 	}
-	console.log("this should be the right date");
+	
+	else {
+		while(fmonthcounter<=tom23) {
+			date[date.length]= fmonthcounter + "/" + fromy23;	
+			fmonthcounter++;
+		}
+	}
+	
 	console.log(date);
 	data23 = [];
 	for (var a=0; a<arrOfAuthors.length; a++){
@@ -255,7 +282,7 @@ function processdataV23(jsonfile){
 		data23[data23.length] = fortheauthor;
 	}
 }
-*/
+
 
 
 
