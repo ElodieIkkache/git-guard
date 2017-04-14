@@ -210,7 +210,7 @@ function processdataV23(jsonfile){
 	
 	//gather the data for the visualisation that correspond to requirements 2 and 3.
 	data23 = [];
-	var name;
+	var member;
 	var commitsByDate;
 	var year;
 	var month;
@@ -218,7 +218,7 @@ function processdataV23(jsonfile){
 	var fortheauthor; 
 	
 	for (var a=0; a<arrOfAuthors.length; a++){
-		name = arrOfAuthors[a];
+		member = arrOfAuthors[a];
 		commitsByDate = [];
 		for (var l = 0; l<date.length; l++){
 			//set the number of commits for each period of time to 0
@@ -227,7 +227,7 @@ function processdataV23(jsonfile){
 		
 		for (var j=0; j<jsonfile.length; j++){
 			//for each commit, if the author is one of the members selected ...
-			if (jsonfile[j]["author"]["login"] == name){
+			if (jsonfile[j]["author"]["login"] == member){
 				//..and that the date is within the limits...
 				year = jsonfile[j]["commit"]["author"]["date"].substring(0, 4);
 				month = parseInt(jsonfile[j]["commit"]["author"]["date"].substring(5, 7));
@@ -238,8 +238,6 @@ function processdataV23(jsonfile){
 						commitsByDate[i] += 1;
 					}
 				}
-			}
-			else {
 			}
 		}
 		
