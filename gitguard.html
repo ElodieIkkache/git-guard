@@ -42,6 +42,11 @@
 			font-size: 20px;
 		}
 		
+		h4 {
+			color: pink;
+			text-align: center;
+		}
+		
 		h3 {
 			color: pink;
 			font-size: 30px;
@@ -58,39 +63,41 @@
 			font-family: Papyrus;
 		}
 		
+		.collapse {
+			text-align : center;
+			padding-left: 0;
+		}
+		
 		.container {
 			background-color:rgba(0, 0, 1, 0.5);
-			padding-left : 0px;
-			padding-right : 0px;
 		}
 		
-		.links {
-			text-align : left;
-			padding-left: 30%;
-			padding-bottom: 10px;
-			padding-top: 10px;
-			background-color:rgba(0, 0, 1, 0.5);
-		}
 		
-		a:link {
+		.btn-link:link {
 			color: white; 
 			background-color: transparent; 
 			text-decoration: none;
 			font-size: 30px;
 		}
 
-		a:visited {
+		.btn-link {
+			color: white;
+			background-color: transparent;
+			padding-top: 10px;
+			text-decoration: none;
+			font-size: 30px;
+		}
+
+		.btn-link:hover {
 			color: pink;
 			background-color: transparent;
 			text-decoration: none;
 			font-size: 30px;
 		}
-
-		a:hover {
-			color: gold;
-			background-color: transparent;
-			text-decoration: underline
-			font-size: 30px;
+		
+		.graph {
+			width: 1000%;
+			height: 450%;
 		}
 
 	</style>
@@ -129,24 +136,30 @@
 			}
 			</script>
 			
-			<div id="myDiv" style="width: 480px; height: 400px;"></div>
-			<p id="test">number of commits for each member</p>
+			<div id="myDiv" class="graph"></div>
+			<h4>number of commits for each member</h4>
 		
 			<br>
 			<br>
 			<br>		
 			
-			<div id="myDivB" style="width: 480px; height: 400px;">
-			<p>number of additions and deletions for each member</p>
+			<div id="myDivB" class="graph">
+			
 		</div>
+		<h4>number of additions and deletions for each member</h4>
+		<br>
+			<br>
+			<br>
+			<hr>
 	  </div>
+	 </div>
 	 </div>
 	
 	
 	
 	<!--23-->
 	 <div class="container">
-	  <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#23"> <img src="V3.png" alt="commit history of several members" style="width:80px;height:80px;border:0">   commit history of one or several members</button>
+	  <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#23"> <img src="V3.png" alt="commit history of several members" style="width:80px;height:80px;border:0">    compare the commit history</button>
 	  <div id="23" class="collapse">
 		<div class="visual">
 			<p> A multiple lines graph will show you the commit history of selected team members. You can also select the period of time you are interested in. Otherwise, the graph will display the history from the start of the project until now.</p>
@@ -157,7 +170,7 @@
 			</div>
 			<div class = "date">
 			<p> From : </p>
-			<select name="day">
+			<select id="Fromday23" name="day">
 				<option value="0">...</option>
 				<option value="1">1</option>
 				<option value="2">2</option>
@@ -192,7 +205,7 @@
 				<option value="31">31</option>
 			</select>
 			
-			<select name="month">
+			<select id="Frommonth23" name="month">
 				<option value="0">...</option>
 				<option value="1">January</option>
 				<option value="2">February</option>
@@ -208,7 +221,7 @@
 				<option value="12">December</option>
 			</select>
 			
-			<select name="year">
+			<select id="Fromyear23" name="year">
 				<option value="0">...</option>
 				<option value="2000">2000</option>
 				<option value="2001">2001</option>
@@ -232,7 +245,7 @@
 			
 			
 			<p> To : </p>
-			<select name="day">
+			<select id="Today23" name="day">
 				<option value="0">...</option>
 				<option value="1">1</option>
 				<option value="2">2</option>
@@ -267,7 +280,7 @@
 				<option value="31">31</option>
 			</select>
 			
-			<select name="month">
+			<select id="Tomonth23" name="month">
 				<option value="0">...</option>
 				<option value="1">January</option>
 				<option value="2">February</option>
@@ -283,7 +296,7 @@
 				<option value="12">December</option>
 			</select>
 			
-			<select name="year">
+			<select id="Toyear23" name="year">
 				<option value="0">...</option>
 				<option value="2000">2000</option>
 				<option value="2001">2001</option>
@@ -316,13 +329,17 @@
 			<br>
 			<script>
 			function change23(){
-				visualisationThree(); 
+				visualisationTwoThree(); 
 				Plotly.newPlot('myDiv23', data23);
 			}
 			</script>
 			
-			<div id="myDiv23" style="width: 480px; height: 400px;"></div>
-			<p id="test">commit history of selected members</p>
+			<div id="myDiv23" class="graph"></div>
+			<h4>commit history of selected members</h4>
+					<br>
+			<br>
+			<br>
+			<hr>
 			
 		</div>
 	  </div>
@@ -330,7 +347,7 @@
 	
 	<!--4-->
 	<div class="container">
-	  <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#4"> <img src="V4.png" alt="commit history of all members" style="width:80px;height:80px;border:0">   commit history of all members</button>
+	  <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#4"> <img src="V4.png" alt="commit history of all members" style="width:80px;height:80px;border:0">   all members' commit history </button>
 	  <div id="4" class="collapse">
 		<div class="visual">
 			<p>A heatmap will show you the commits of each team member, for a chosen file. You can also select the period of time you are interested in. Otherwise, the graph will display the history from the start of the project until now. It is possible to focus only on a chuck of lines.</p>
@@ -341,7 +358,7 @@
 			</div>
 			<div class = "date">
 			<p> From : </p>
-			<select name="day">
+			<select id="Fromday4" name="day">
 				<option value="0">...</option>
 				<option value="1">1</option>
 				<option value="2">2</option>
@@ -376,7 +393,7 @@
 				<option value="31">31</option>
 			</select>
 			
-			<select name="month">
+			<select id="Frommonth4" name="month">
 				<option value="0">...</option>
 				<option value="1">January</option>
 				<option value="2">February</option>
@@ -392,7 +409,7 @@
 				<option value="12">December</option>
 			</select>
 			
-			<select name="year">
+			<select id="Fromyear4" name="year">
 				<option value="0">...</option>
 				<option value="2000">2000</option>
 				<option value="2001">2001</option>
@@ -416,7 +433,7 @@
 			
 			
 			<p> To : </p>
-			<select name="day">
+			<select id="Today4" name="day">
 				<option value="0">...</option>
 				<option value="1">1</option>
 				<option value="2">2</option>
@@ -451,7 +468,7 @@
 				<option value="31">31</option>
 			</select>
 			
-			<select name="month">
+			<select id="Tomonth4" name="month">
 				<option value="0">...</option>
 				<option value="1">January</option>
 				<option value="2">February</option>
@@ -467,7 +484,7 @@
 				<option value="12">December</option>
 			</select>
 			
-			<select name="year">
+			<select id="Toyear4" name="year">
 				<option value="0">...</option>
 				<option value="2000">2000</option>
 				<option value="2001">2001</option>
@@ -511,8 +528,12 @@
 			}
 			</script>
 			
-			<div id="myDiv4" style="width: 480px; height: 400px;"></div>
-			<p>commit history for all members</p>
+			<div id="myDiv4" class="graph"></div>
+			<h4>commit history for all members</h4>
+			<br>
+			<br>
+			<br>
+			<hr>
 	
 		</div>
 	  </div>
@@ -521,10 +542,10 @@
 	 
 	 <!--5-->
 	<div class="container">
-	  <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#5"  onclick = "change5()"> <img src="V5.png" alt="lines of code from each members" style="width:80px;height:80px;border:0">   lines of code from each member</button>
+	  <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#5"  onclick = "change5()"> <img src="V5.png" alt="lines of code from each members" style="width:80px;height:80px;border:0">   codelines from all members</button>
 	  <div id="5" class="collapse">
 		<div class="visual">
-			<p>Here is a zoomable circle packing!! The black circle represents the project. The greys ones are the folders. Whites are the diffents files. And the colorfull ones represents the contributions of each members to the file! Feel free to zoom in some circle !</p>
+			<p>This piechart is showing the number of lines of code for each member of the team.</p>
 			<br>
 			<script>
 			function change5(){
@@ -534,8 +555,12 @@
 			}
 			</script>
 			
-			<div id="myDiv5" style="width: 480px; height: 400px;"></div>
-			<p>number of lines of code from each member</p>
+			<div id="myDiv5" class="graph"></div>
+			<h4>number of lines of code from each member</h4>
+			<br>
+			<br>
+			<br>
+			
 
 		</div>
 	  </div>
