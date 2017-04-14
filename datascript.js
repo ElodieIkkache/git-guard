@@ -202,15 +202,7 @@ function processdataV23(jsonfile){
 	var numberOfMonth = 12*numberOfYears + tom23 - fromm23 + 1; //12 + 3 - 7 = 8 + 1 = 9*/
 	
 	var date = [];
-<<<<<<< HEAD
-	var numberOfYears = toy23 - fromy23;
-	var numberOfMonth = 12*numberOfYears + tom23 - fromm23;
 
-	var date = [];
-	for (var y = fromy23; y<= toy23; y++){
-		for (var m=1; m<=12; m++){
-			//if it is the good year but too early for the months
-=======
 	var y;
 	var m;
 	var fmonthcounter = fromm23; //may 2016, jun 2018
@@ -219,8 +211,6 @@ function processdataV23(jsonfile){
 	
 	if(fromy23!=toy23) {
 		for (y = fromy23; y <= toy23; y++){
-			
->>>>>>> 00da9fb3eefb5f505f4ceaecfeb1184a2a6218cd
 			if (y == fromy23) {
 				while(fmonthcounter<=12) {
 					date[date.length]= fmonthcounter + "/" + y;					
