@@ -818,14 +818,16 @@ var responseText = [
 ];
 
 
-var data1 = [];
-var data2 = [];
+var dataauthors = [];
+var datacommits = [];
+var dataadditions = [];
+var datadeletions = [];
 
 
 for (var i = 0; i<responseText.length; i++) {
 
-	var contribution1 = {author:responseText[i]["author"]["login"], commits:responseText[i]["total"]};
-	data1[data1.length] = contribution1; 
+	dataauthors[dataauthors.length] = responseText[i]["author"]["login"];
+	datacommits[datacommits.length] = responseText[i]["total"];	
 	
 	var addition = 0;
 	var deletion = 0;
@@ -835,9 +837,33 @@ for (var i = 0; i<responseText.length; i++) {
 		deletion += responseText[i]["weeks"][j]["d"];
 	}
 	
-	var contribution2 = {author:responseText[i]["author"]["login"], additions:addition, deletions:deletion};
-	data2[data2.length] = contribution2;
-	
+	dataadditions[dataadditions.length] = addition;
+	datadeletions[datadeletions.length] = deletion;
 }
 
-console.log(data2);
+var data1A = [{
+			  x: dataauthors,
+			  y: datacommits,
+			  type: 'bar'
+			}];
+
+var trace1 = {
+  x: dataauthors,
+  y: datadeletions,
+  name: 'deletions',
+  type: 'bar'
+};
+
+var trace2 = {
+  x: dataauthors,
+  y: dataadditions,
+  name: 'additions',
+  type: 'bar'
+};
+
+var data1B = [trace1, trace2];
+
+var layout1B = {
+	barmode: 'stack'
+};
+			
