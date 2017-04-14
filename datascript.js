@@ -312,7 +312,7 @@ function visualisationFour() {
 	//this is the function called from the html page for the 4th visualisation
 	//console.log(link4);
 	getlink4(); //sets the parameters
-	console.log(filePath);
+	//console.log(filePath);
 	var v4Data = visualisation(link4); //get the json file
 	console.log(v4Data);
 	//processdataV4(v4Data); //transfrom it into usable data
@@ -320,20 +320,23 @@ function visualisationFour() {
 
 function getlink4() {
 	filePath = getFilepath();
+	console.log(filePath);
 	link4 += filePath;
-	console.log(filepath);
-	fromm4 = parseInt(document.getElementById("frommonth4").value);
-	fromy4 = parseInt(document.getElementById("fromyear4").value);
-	tom4 = parseInt(document.getElementById("tomonth4").value);
-	toy4 = parseInt(document.getElementById("toyear4").value);
+	console.log(link4);
+	fromm4 = parseInt(document.getElementById("Frommonth4").value);
+	fromy4 = parseInt(document.getElementById("Fromyear4").value);
+	tom4 = parseInt(document.getElementById("Tomonth4").value);
+	toy4 = parseInt(document.getElementById("Toyear4").value);
 	//startLineNo = document.forms["form4"]["lineFrom"].value;
 	//endLineNo = document.forms["form4"]["lineTo"].value;
 }
 
 function getFilepath() {
-	var gitpath = (document.forms["form4"]["file"].value).trim; //gets entire filepath as string
+	var gitpath = (document.forms["form4"]["file"].value).trim(); //gets entire filepath as string
+	console.log(gitpath);
 	var arrPath = gitpath.split("/");
-	var len = arrPath.length();
+	console.log(arrPath);
+	var len = arrPath.length;
 	var i=0;
 	var finalPath;
 	for (i=7; i<len; i++) {
@@ -351,43 +354,97 @@ function getFilepath() {
 
 function processdataV4(jsonfile){
 	//this function takes a json as an input and formats the data so that it is ready for the forth visualisation
-	
-	//the date axis
 	var date = [];
-	//var numberOfYears = toy4 - fromy4;
-	//var numberOfMonth = 12*numberOfYears + tom4 - fromm4;
 
-	var date = [];
-	for (var y = fromy4; y<= toy4; y++){
-		for (var m=1; m<=12; m++){
-			//if it is the good year but too early for the months
+	var y;
+	var m;
+	var fmonthcounter = fromm4; //may 2016, jun 2018
+	var tmonthcounter = 1;
+	var normalcounter = 1;
+	
+	if(fromy4!=toy4) {
+		for (y = fromy4; y <= toy4; y++){
 			if (y == fromy4) {
-				console.log("does it goes inside the too early");
-				if (m < fromm4){
-					console.log(m);
+				while(fmonthcounter<=12) {
+					date[date.length]= fmonthcounter + "/" + y;					
+					fmonthcounter++;
 				}
 			}
+
 			//if it is the last year but too late for the month
 			else if (y == toy4) {
-				if (m>tom4){
-					console.log(m);
+				console.log("elseif");
+				while(tmonthcounter<=tom4) {
+					date[date.length]= tmonthcounter + "/" + y;
+					tmonthcounter++;
 				}
 			}
 			//if it is within time limits
 			else {
-				date[date.length]= m + "/" + y;
+				console.log("else");
+				while(normalcounter<=12) {
+					date[date.length]= normalcounter + "/" + y;
+					normalcounter++;
+				}
+				normalcounter=1;
 			}
-			
+				
 		}
 	}
+	
+	else {
+		while(fmonthcounter<=tom4) {
+			date[date.length]= fmonthcounter + "/" + fromy4;	
+			fmonthcounter++;
+		}
+	}
+	var authordict = {}
+	var auth;
+	var year;
+	var month;
+	var k;
+	for (var j=0; j<jsonfile.length; j++){
+		auth = jsonfile[j]["author"]["login"];
+		year = jsonfile[j]["commit"]["author"]["date"].substring(0, 4);
+		month = parseInt(jsonfile[j]["commit"]["author"]["date"].substring(5, 7));
+		k = month + "/" + year;
+		
+		if (auth in authordict) {
+			for (var i= 0; i<date.length; i++){
+					if (date[i] == k){
+						authordict[auth][i] += 1;
+					}
+				}
+		}
+		else {
+			authordict[auth] = [];
+			for (var b = 0; b < date.length; b++){
+				authordict[auth][authordict[auth].length] = 0;
+			}
+			for (var i= 0; i<date.length; i++){
+					if (date[i] == k){
+						authordict[auth][i] += 1;
+					}
+				}
+		}
+		
+	}
+	
+	var authors4 = [];
+	var zaxis = [];
+	for (var key in authordict) {
+		authors4[authors4.length] =  key;
+		zaxis[zaxis.length] = authordict[key];
+	}
+	
 	data4 = [
-  {
-    z: [[1, 20, 30, 50, 1], [20, 1, 60, 80, 30], [30, 60, 1, -10, 20]],
-    x: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-    y: ['Morning', 'Afternoon', 'Evening'],
-    type: 'heatmap'
-  }
-];
+	  {
+		z: zaxis,
+		x: date,
+		y: authors4,
+		type: 'heatmap'
+	  }
+	];
 	
 }
 
