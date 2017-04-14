@@ -42,6 +42,11 @@
 			font-size: 20px;
 		}
 		
+		h4 {
+			color: pink;
+			text-align: center;
+		}
+		
 		h3 {
 			color: pink;
 			font-size: 30px;
@@ -68,15 +73,6 @@
 		}
 		
 		
-		
-		.links {
-			text-align : left;
-			padding-left: 30%;
-			padding-bottom: 10px;
-			padding-top: 10px;
-			background-color:rgba(0, 0, 1, 0.5);
-		}
-		
 		.btn-link:link {
 			color: white; 
 			background-color: transparent; 
@@ -87,6 +83,7 @@
 		.btn-link {
 			color: white;
 			background-color: transparent;
+			padding-top: 30px;
 			text-decoration: none;
 			font-size: 30px;
 		}
@@ -96,6 +93,11 @@
 			background-color: transparent;
 			text-decoration: none;
 			font-size: 30px;
+		}
+		
+		.graph {
+			width: 1000%;
+			height: 450%;
 		}
 
 	</style>
@@ -134,25 +136,21 @@
 			}
 			</script>
 			
-			<div id="myDiv" style="width: 1130%; height: 450%;"></div>
-			<h2>number of commits for each member</h2>
+			<div id="myDiv" class="graph"></div>
+			<h4>number of commits for each member</h4>
 		
 			<br>
 			<br>
 			<br>		
 			
-			<div id="myDivB" style="width: 480px; height: 400px;">
-			<h2>number of additions and deletions for each member</h2>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
-			<br>
+			<div id="myDivB" class="graph">
+			
 		</div>
+		<h4>number of additions and deletions for each member</h4>
+		<br>
+			<br>
+			<br>
+			<hr>
 	  </div>
 	 </div>
 	 </div>
@@ -331,16 +329,17 @@
 			<br>
 			<script>
 			function change23(){
-				visualisationThree(); 
+				visualisationTwoThree(); 
 				Plotly.newPlot('myDiv23', data23);
 			}
 			</script>
 			
-			<div id="myDiv23" style="width: 480px; height: 400px;"></div>
-			<h2>commit history of selected members</h2>
+			<div id="myDiv23" class="graph"></div>
+			<h4>commit history of selected members</h4>
+					<br>
 			<br>
 			<br>
-			<br>
+			<hr>
 			
 		</div>
 	  </div>
@@ -529,11 +528,12 @@
 			}
 			</script>
 			
-			<div id="myDiv4" style="width: 480px; height: 400px;"></div>
-			<h2>commit history for all members</h2>
+			<div id="myDiv4" class="graph"></div>
+			<h4>commit history for all members</h4>
 			<br>
 			<br>
 			<br>
+			<hr>
 	
 		</div>
 	  </div>
@@ -555,11 +555,12 @@
 			}
 			</script>
 			
-			<div id="myDiv5" style="width: 480px; height: 400px;"></div>
-			<h2>number of lines of code from each member</h2>
+			<div id="myDiv5" class="graph"></div>
+			<h4>number of lines of code from each member</h4>
 			<br>
 			<br>
 			<br>
+			
 
 		</div>
 	  </div>
