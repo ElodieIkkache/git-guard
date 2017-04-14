@@ -31,8 +31,9 @@ var fromm4;
 var fromy4;
 var tom4;
 var toy4;
-
 var filePath;
+
+var data4;
 
 //visualisation 5
 var numberOfLines;
@@ -201,6 +202,7 @@ function processdataV23(jsonfile){
 	var numberOfMonth = 12*numberOfYears + tom23 - fromm23 + 1; //12 + 3 - 7 = 8 + 1 = 9*/
 	
 	var date = [];
+
 	var y;
 	var m;
 	var fmonthcounter = fromm23; //may 2016, jun 2018
@@ -209,7 +211,6 @@ function processdataV23(jsonfile){
 	
 	if(fromy23!=toy23) {
 		for (y = fromy23; y <= toy23; y++){
-			
 			if (y == fromy23) {
 				while(fmonthcounter<=12) {
 					date[date.length]= fmonthcounter + "/" + y;					
@@ -329,6 +330,44 @@ function getFilepath() {
 
 function processdataV4(jsonfile){
 	//this function takes a json as an input and formats the data so that it is ready for the forth visualisation
+	
+	//the date axis
+	var date = [];
+	//var numberOfYears = toy4 - fromy4;
+	//var numberOfMonth = 12*numberOfYears + tom4 - fromm4;
+
+	var date = [];
+	for (var y = fromy4; y<= toy4; y++){
+		for (var m=1; m<=12; m++){
+			//if it is the good year but too early for the months
+			if (y == fromy4) {
+				console.log("does it goes inside the too early");
+				if (m < fromm4){
+					console.log(m);
+				}
+			}
+			//if it is the last year but too late for the month
+			else if (y == toy4) {
+				if (m>tom4){
+					console.log(m);
+				}
+			}
+			//if it is within time limits
+			else {
+				date[date.length]= m + "/" + y;
+			}
+			
+		}
+	}
+	data4 = [
+  {
+    z: [[1, 20, 30, 50, 1], [20, 1, 60, 80, 30], [30, 60, 1, -10, 20]],
+    x: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+    y: ['Morning', 'Afternoon', 'Evening'],
+    type: 'heatmap'
+  }
+];
+	
 }
 
 
