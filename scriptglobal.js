@@ -1,4 +1,4 @@
-[
+var responseText = [
   {
     "total": 15,
     "weeks": [
@@ -815,4 +815,55 @@
       "site_admin": false
     }
   }
-]
+];
+
+
+var dataauthors = [];
+var datacommits = [];
+var dataadditions = [];
+var datadeletions = [];
+
+
+for (var i = 0; i<responseText.length; i++) {
+
+	dataauthors[dataauthors.length] = responseText[i]["author"]["login"];
+	datacommits[datacommits.length] = responseText[i]["total"];	
+	
+	var addition = 0;
+	var deletion = 0;
+	
+	for (var j = 0; j<responseText[i]["weeks"].length; j++){
+		addition += responseText[i]["weeks"][j]["a"];
+		deletion += responseText[i]["weeks"][j]["d"];
+	}
+	
+	dataadditions[dataadditions.length] = addition;
+	datadeletions[datadeletions.length] = deletion;
+}
+
+var data1A = [{
+			  x: dataauthors,
+			  y: datacommits,
+			  type: 'bar'
+			}];
+
+var trace1 = {
+  x: dataauthors,
+  y: datadeletions,
+  name: 'deletions',
+  type: 'bar'
+};
+
+var trace2 = {
+  x: dataauthors,
+  y: dataadditions,
+  name: 'additions',
+  type: 'bar'
+};
+
+var data1B = [trace1, trace2];
+
+var layout1B = {
+	barmode: 'stack'
+};
+			
