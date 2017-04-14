@@ -125,11 +125,12 @@
 			<p>See the contribution of all team members! The first visualisation is based on the number of commits for each of the team members. The second is based on the total number of additions and deletions.</p>
 			<br>
 			<div id="myDiv" style="width: 480px; height: 400px;"></div>
-			<script src="scriptglobal.js"></script>
+			<script src="datascript.js"></script>
 			<script>
 			Plotly.newPlot('myDiv', data1A);
+			document.getElementById("test").innerHTML="works";
 			</script>
-			<p>number of commits for each member</p>
+			<p id="test">number of commits for each member</p>
 			
 		
 		
