@@ -186,6 +186,9 @@ function getlink23() {
 	usernames = document.forms["form23"]["author"].value; //gets the username(s) as string , authors separated by ,
 	console.log(usernames);
 	arrOfAuthors = usernames.split(","); //use string.trim() before checking author
+	for (var i=0; i< arrOfAuthors.length; i++){
+		arrOfAuthors[i] = arrOfAuthors[i].trim() ;
+	}
 	fromm23 = parseInt(document.getElementById("Frommonth23").value);
 	fromy23 = parseInt(document.getElementById("Fromyear23").value);
 	tom23 = parseInt(document.getElementById("Tomonth23").value);
@@ -246,25 +249,43 @@ function processdataV23(jsonfile){
 		}
 	}
 	
-	console.log(date);
+	
 	data23 = [];
+	var name;
+	var commitsByDate;
+	var year;
+	var month;
+	var k;
+	var fortheauthor; 
+	
 	for (var a=0; a<arrOfAuthors.length; a++){
-		var name = arrOfAuthors[a];
-		var commitsByDate = new Array(date.length).fill(0);
+		name = arrOfAuthors[a];
+		commitsByDate = [];
+		for (var l = 0; l<date.length; l++){
+			commitsByDate[commitsByDate.length] = 0;
+		}
 		
 		for (var j=0; j<jsonfile.length; j++){
-			if (jsonfile[j]["author"]["login"]==name){
-				var year = jsonfile[j]["commit"]["author"]["date"].substring(0, 4);
-				var month = jsonfile[j]["commit"]["author"]["date"].substring(5, 7);
+			console.log(jsonfile[j]["author"]["login"] == name);
+			if (jsonfile[j]["author"]["login"] == name){
+				console.log("is it true?");
+				year = jsonfile[j]["commit"]["author"]["date"].substring(0, 4);
+				month = parseInt(jsonfile[j]["commit"]["author"]["date"].substring(5, 7));
+				k = month + "/" + year;
 				for (var i= 0; i<date.length; i++){
-					if (date[i] == month + "/" + year){
+					if (date[i] == k){
 						commitsByDate[i] += 1;
+						console.log("is it still true?");
 					}
 				}
 			}
+			else {
+				console.log(jsonfile[j]["author"]["login"]);
+			}
 		}
 		
-		var fortheauthor = {
+		
+		fortheauthor = {
 			x: date, 
 			y: commitsByDate, 
 			type: 'scatter'
