@@ -6,44 +6,38 @@ var link5;
 var userInput;
 var owner;
 var repo;
-var returnObj;
-var arrOfAuthors;
-var fromd23;
-var fromm23;
-var fromy23;
-var tod23;
-var tom23;
-var toy23;
-var fromd4;
-var fromm4;
-var fromy4;
-var tod4;
-var tom4;
-var toy4;
-var filePath;
-var startLineNo;
-var endLineNo;
-
-var fromDateISO23;
-var toDateISO23;
-
-var fromDateISO4;
-var toDateISO4;
 
 //visualisation1
 var dataauthors;
 var datacommits;
 var dataadditions;
 var datadeletions;
+
 var data1A;
 var data1B;
 var layout1B;
 
 //visualisation 2 and 3
+var arrOfAuthors;
+var fromm23;
+var fromy23;
+var tom23;
+var toy23;
+
+var data23
 
 //visualisation 4
+var fromm4;
+var fromy4;
+var tom4;
+var toy4;
+
+var filePath;
 
 //visualisation 5
+var numberOfLines;
+var data5;
+var layout5;
 
 
 
@@ -61,49 +55,29 @@ function readRepository() {
 	link4 = "https://api.github.com/repos/" + owner + "/" + repo + "/commits?path="; //add path later 
 }
 
-function getlink23() {
-	usernames = document.forms["form23"]["author"].value; //gets the username(s) as string , authors separated by ,
-	console.log(usernames);
-	arrOfAuthors = usernames.split(","); //use string.trim() before checking author
-	fromd23 = document.getElementById("fromday23").value;
-	fromm23 = document.getElementById("frommonth23").value;
-	fromy23 = document.getElementById("fromyear23").value;
-	tod23 = document.getElementById("today23").value;
-	tom23 = document.getElementById("tomonth23").value;
-	toy23 = document.getElementById("toyear23").value;
-	fromDateISO23 = getDateFromNo(fromd23, fromm23, fromy23);
-	toDateISO23 = getDateFromNo(tod23, tom23, toy23);
+function getRepo() {
+userInput = document.forms["GitLink"]["fname"].value;	
+var arrOfInputs = userInput.split("/");
+owner = arrOfInputs[3];
+repo = arrOfInputs[4];
+console.log(userInput);
+console.log(arrOfInputs);
+console.log(owner);
+console.log(repo);
 }
 
-function getlink4() {
-	filePath = getFilepath();
-	link4 += filePath;
-	console.log(filepath);
-	fromm4 = parseInt(document.getElementById("frommonth4").value);
-	fromy4 = parseInt(document.getElementById("fromyear4").value);
-	tom4 = parseInt(document.getElementById("tomonth4").value);
-	toy4 = parseInt(document.getElementById("toyear4").value);
-	//startLineNo = document.forms["form4"]["lineFrom"].value;
-	//endLineNo = document.forms["form4"]["lineTo"].value;
+//commun fonctions
+function visualisation(link) {
+	var xmlHttpObjective_1 = new XMLHttpRequest();
+	xmlHttpObjective_1.open("GET",link, false); // false for synchronous request
+	xmlHttpObjective_1.send(null);
+	var responseObjective_1 =  JSON.parse(xmlHttpObjective_1.responseText);
+	//console.log(typeof(responseObjective_1));
+	//console.log(responseObjective_1);
+	return responseObjective_1;
 }
 
-function getFilepath() {
-	var gitpath = (document.forms["form4"]["file"].value).trim; //gets entire filepath as string
-	var arrPath = gitpath.split("/");
-	var len = arrPath.length();
-	var i=0;
-	var finalPath;
-	for (i=7; i<len; i++) {
-		if(i=len-1) {
-			finalPath +=arrPath[i];
-		}
-		else {
-			finalPath +=arrPath[i]+"/";
-		}
-	}
-	return finalPath;
-}
-
+/*
 function getDateFromNo(d,m,y) {
 	var year = parseInt(y);
 	console.log(year);
@@ -119,17 +93,7 @@ function getDateFromNo(d,m,y) {
 	var d2 = arrOfDates[0] + "T";
 	return d2;
 }
-
-function getRepo() {
-userInput = document.forms["GitLink"]["fname"].value;	
-var arrOfInputs = userInput.split("/");
-owner = arrOfInputs[3];
-repo = arrOfInputs[4];
-console.log(userInput);
-console.log(arrOfInputs);
-console.log(owner);
-console.log(repo);
-}
+*/
 
 function dumpResponse() {
   // `this` will refery to the `XMLHTTPRequest` object that executes this function
@@ -148,38 +112,6 @@ function visualisationOne(){
 	processdataV1(v1Data); //transfrom it into usable data
 	console.log(dataauthors);
 	console.log(datacommits);
-}
-
-function visualisationTwoThree(){
-	//this is the function called from the html page for the third visualisation
-	console.log(link23);
-	getlink23(); //sets the authors, dates
-	console.log(arrOfAuthors);
-	console.log(fromDateISO23);
-	console.log(toDateISO23);
-	var v23Data = visualisation(link23); //get the json file
-	console.log(v23Data);
-	//processdataV23(v23Data); //transfrom it into usable data
-}
-
-function visualisationFour() {
-	//this is the function called from the html page for the 4th visualisation
-	//console.log(link4);
-	getlink4(); //sets the parameters
-	console.log(filePath);
-	var v4Data = visualisation(link4); //get the json file
-	console.log(v4Data);
-	//processdataV4(v4Data); //transfrom it into usable data
-}
-
-function visualisation(link) {
-var xmlHttpObjective_1 = new XMLHttpRequest();
-xmlHttpObjective_1.open("GET",link, false); // false for synchronous request
-xmlHttpObjective_1.send(null);
-var responseObjective_1 =  JSON.parse(xmlHttpObjective_1.responseText);
-//console.log(typeof(responseObjective_1));
-//console.log(responseObjective_1);
-return responseObjective_1;
 }
 
 
@@ -244,15 +176,86 @@ function processdataV1(jsonfile){
 	
 	
 	
-	
-	
-	
-	
 //Second and third visualisations --> there is a form!! submit button should make a section appear
-function processdataV23(jsonfile){
-	//this function takes a json as an input and formats the data so that it is ready for the second and third visualisation
+function visualisationTwoThree(){
+	//this is the function called from the html page for the third visualisation
+	console.log(link23);
+	getlink23(); //sets the authors, dates
+	var v23Data = visualisation(link23); //get the json file
+	console.log(v23Data);
+	processdataV23(v23Data); //transfrom it into usable data
 }
 
+function getlink23() {
+	usernames = document.forms["form23"]["author"].value; //gets the username(s) as string , authors separated by ,
+	console.log(usernames);
+	arrOfAuthors = usernames.split(","); //use string.trim() before checking author
+	fromm23 = parseInt(document.getElementById("Frommonth23").value);
+	fromy23 = parseInt(document.getElementById("Fromyear23").value);
+	tom23 = parseInt(document.getElementById("Tomonth23").value);
+	toy23 = parseInt(document.getElementById("Toyear23").value);
+}
+/*
+function processdataV23(jsonfile){
+	//this function takes a json as an input and formats the data so that it is ready for the second and third visualisation
+	
+	//the data axis
+	var date = [];
+	var scale;
+	var numberOfYears = toy23 - fromy23;
+	var numberOfMonth = 12*numberOfYears + tom23 - fromm23;
+
+	var date = [];
+	for (var y = fromy23; y<= toy23; y++){
+		for (var m=1; m<=12; m++){
+			//if it is the good year but too early for the months
+			if (y == fromy23) {
+				console.log("does it goes inside the too early");
+				if (m < fromm23){
+					console.log(m);
+				}
+			}
+			//if it is the last year but too late for the month
+			else if (y == toy23) {
+				if (m>tom23){
+					console.log(m);
+				}
+			}
+			//if it is within time limits
+			else {
+				date[date.length]= m + "/" + y;
+			}
+			
+		}
+	}
+	console.log("this should be the right date");
+	console.log(date);
+	data23 = [];
+	for (var a=0; a<arrOfAuthors.length; a++){
+		var name = arrOfAuthors[a];
+		var commitsByDate = new Array(date.length).fill(0);
+		
+		for (var j=0; j<jsonfile.length; j++){
+			if (jsonfile[j]["author"]["login"]==name){
+				var year = jsonfile[j]["commit"]["author"]["date"].substring(0, 4);
+				var month = jsonfile[j]["commit"]["author"]["date"].substring(5, 7);
+				for (var i= 0; i<date.length; i++){
+					if (date[i] == month + "/" + year){
+						commitsByDate[i] += 1;
+					}
+				}
+			}
+		}
+		
+		var fortheauthor = {
+			x: date, 
+			y: commitsByDate, 
+			type: 'scatter'
+		};
+		data23[data23.length] = fortheauthor;
+	}
+}
+*/
 
 
 
@@ -267,6 +270,46 @@ function processdataV23(jsonfile){
 
 
 //Forth visualisation --> there is a form!! submit button should make a section appear
+function visualisationFour() {
+	//this is the function called from the html page for the 4th visualisation
+	//console.log(link4);
+	getlink4(); //sets the parameters
+	console.log(filePath);
+	var v4Data = visualisation(link4); //get the json file
+	console.log(v4Data);
+	//processdataV4(v4Data); //transfrom it into usable data
+}
+
+function getlink4() {
+	filePath = getFilepath();
+	link4 += filePath;
+	console.log(filepath);
+	fromm4 = parseInt(document.getElementById("frommonth4").value);
+	fromy4 = parseInt(document.getElementById("fromyear4").value);
+	tom4 = parseInt(document.getElementById("tomonth4").value);
+	toy4 = parseInt(document.getElementById("toyear4").value);
+	//startLineNo = document.forms["form4"]["lineFrom"].value;
+	//endLineNo = document.forms["form4"]["lineTo"].value;
+}
+
+function getFilepath() {
+	var gitpath = (document.forms["form4"]["file"].value).trim; //gets entire filepath as string
+	var arrPath = gitpath.split("/");
+	var len = arrPath.length();
+	var i=0;
+	var finalPath;
+	for (i=7; i<len; i++) {
+		if(i=len-1) {
+			finalPath +=arrPath[i];
+		}
+		else {
+			finalPath +=arrPath[i]+"/";
+		}
+	}
+	return finalPath;
+}
+
+
 
 function processdataV4(jsonfile){
 	//this function takes a json as an input and formats the data so that it is ready for the forth visualisation
@@ -286,6 +329,44 @@ function processdataV4(jsonfile){
 
 
 //Fifth visualisation --> /!\no from!! so it's either with the container button or a 'display graph' button
+function visualisationFive(){
+	//this is the function called from the html page for the first visualisation
+	console.log(link1);
+	var v5Data = visualisation(link1); //get the json file
+	processdataV5(v5Data); //transfrom it into usable data
+}
+
 function processdataV5(jsonfile){
 	//this function takes a json as an input and formats the data so that it is ready for the fifth visualisation
+	var dataauthors5 = [];
+	var datacontributions = [];
+	numberOfLines = 0;
+		
+
+	for (var i = 0; i<jsonfile.length; i++) {
+
+		dataauthors5[dataauthors5.length] = jsonfile[i]["author"]["login"];	
+		
+		var addition = 0;
+		var deletion = 0;
+		
+		for (var j = 0; j<jsonfile[i]["weeks"].length; j++){
+			addition += jsonfile[i]["weeks"][j]["a"];
+			deletion += jsonfile[i]["weeks"][j]["d"];
+		}
+		datacontributions[datacontributions.length] = addition + deletion;
+		numberOfLines = numberOfLines + addition - deletion;
+	}
+
+	data5 = [{
+	  values: datacontributions,
+	  labels: dataauthors5,
+	  type: 'pie'
+	}];
+
+	layout5 = {
+	  height: 400,
+	  width: 500
+	};
+	
 }
