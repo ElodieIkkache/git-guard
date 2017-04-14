@@ -32,6 +32,8 @@ var fromy4;
 var tom4;
 var toy4;
 
+var filePath;
+
 //visualisation 5
 var numberOfLines;
 var data5;
@@ -50,6 +52,7 @@ function readRepository() {
 	getRepo();
 	link1 = "https://api.github.com/repos/" + owner + "/" + repo + "/stats/contributors";
 	link23 = "https://api.github.com/repos/" + owner + "/" + repo + "/commits";
+	link4 = "https://api.github.com/repos/" + owner + "/" + repo + "/commits?path="; //add path later 
 }
 
 function getRepo() {
@@ -63,12 +66,6 @@ console.log(owner);
 console.log(repo);
 }
 
-
-
-
-
-
-
 //commun fonctions
 function visualisation(link) {
 	var xmlHttpObjective_1 = new XMLHttpRequest();
@@ -79,6 +76,7 @@ function visualisation(link) {
 	//console.log(responseObjective_1);
 	return responseObjective_1;
 }
+
 /*
 function getDateFromNo(d,m,y) {
 	var year = parseInt(y);
@@ -96,6 +94,7 @@ function getDateFromNo(d,m,y) {
 	return d2;
 }
 */
+
 function dumpResponse() {
   // `this` will refery to the `XMLHTTPRequest` object that executes this function
   console.log(this.responseText);
@@ -114,6 +113,7 @@ function visualisationOne(){
 	console.log(dataauthors);
 	console.log(datacommits);
 }
+
 
 function processdataV1(jsonfile){
 	//this function takes a json as an input and formats the data so that it is ready for the first visualisation (2 graphs)
@@ -270,6 +270,46 @@ function processdataV23(jsonfile){
 
 
 //Forth visualisation --> there is a form!! submit button should make a section appear
+function visualisationFour() {
+	//this is the function called from the html page for the 4th visualisation
+	//console.log(link4);
+	getlink4(); //sets the parameters
+	console.log(filePath);
+	var v4Data = visualisation(link4); //get the json file
+	console.log(v4Data);
+	//processdataV4(v4Data); //transfrom it into usable data
+}
+
+function getlink4() {
+	filePath = getFilepath();
+	link4 += filePath;
+	console.log(filepath);
+	fromm4 = parseInt(document.getElementById("frommonth4").value);
+	fromy4 = parseInt(document.getElementById("fromyear4").value);
+	tom4 = parseInt(document.getElementById("tomonth4").value);
+	toy4 = parseInt(document.getElementById("toyear4").value);
+	//startLineNo = document.forms["form4"]["lineFrom"].value;
+	//endLineNo = document.forms["form4"]["lineTo"].value;
+}
+
+function getFilepath() {
+	var gitpath = (document.forms["form4"]["file"].value).trim; //gets entire filepath as string
+	var arrPath = gitpath.split("/");
+	var len = arrPath.length();
+	var i=0;
+	var finalPath;
+	for (i=7; i<len; i++) {
+		if(i=len-1) {
+			finalPath +=arrPath[i];
+		}
+		else {
+			finalPath +=arrPath[i]+"/";
+		}
+	}
+	return finalPath;
+}
+
+
 
 function processdataV4(jsonfile){
 	//this function takes a json as an input and formats the data so that it is ready for the forth visualisation
