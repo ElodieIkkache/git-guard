@@ -110,7 +110,7 @@
 		<h2>Use this application to analyse the contributions to git projects!</h2>
 		<form class="form-inline" name="GitLink" onsubmit="return false">
 			<div class="input-group">
-				<input name="fname" type="text" class="form-control" size="50" id="repository" placeholder="GIT repository link" required>
+				<input name="fname" type="text" class="form-control" size="50" id="repository" placeholder="GIT repository link (ex: https://github.com/name/repo)" required>
 				<div class="input-group-btn">
 					<button type="submit" onclick="readRepository()" class="btn btn-default">Submit</button>
 			    </div>
@@ -286,7 +286,7 @@
 			<br>
 			<form id = "form4" class="form-inline" onsubmit="return false">
 			<div class="input-group">
-				<input type="text" name="file" class="form-control" size="50" id="file" placeholder="please choose a file" required>
+				<input type="text" name="file" class="form-control" size="50" id="file" placeholder="choose a file (ex: https://github.../repo/blob/master/file.js)" required>
 			</div>
 			<div class = "date">
 			<p> From : </p>
